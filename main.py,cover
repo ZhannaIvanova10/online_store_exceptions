@@ -1,0 +1,341 @@
+> """
+> Модуль для работы с интернет-магазином.
+> Реализует полную функциональность всех домашних заданий.
+> """
+  
+> from abc import ABC, abstractmethod
+> from typing import Dict, List, Any
+  
+  
+  # ==================== ДЗ 16.2: Миксин ====================
+> class ReprMixin:
+>     """Миксин для красивого repr представления."""
+  
+-     def __repr__(self):
+-         attrs = ', '.join(
+-             [f"{key}={value!r}" for key, value in self.__dict__.items()]
+-         )
+-         return f"{self.__class__.__name__}({attrs})"
+  
+  
+  # ==================== ДЗ 16.2: Абстрактный класс ====================
+> class BaseProduct(ABC):
+>     """Абстрактный базовый класс для товаров."""
+  
+-     @abstractmethod
+-     def __init__(self, name: str, description: str,
+-                  price: float, quantity: int):
+-         pass
+  
+-     @abstractmethod
+-     def __str__(self):
+-         pass
+  
+-     @abstractmethod
+-     def __add__(self, other):
+-         pass
+  # ==================== ДЗ 17.1: Исключение ====================
+  
+  
+> class ZeroQuantityError(ValueError):
+>     """Исключение для товаров с нулевым количеством."""
+>     pass
+  
+  
+  # ==================== ДЗ 14.1-17.1: Класс Product ====================
+> class Product(BaseProduct, ReprMixin):
+>     """Класс для представления товара в магазине."""
+  
+>     def __init__(self, name: str, description: str,
+>                  price: float, quantity: int):
+>         """
+>         Инициализация товара.
+  
+>         Args:
+>             name: Название товара
+>             description: Описание товара
+>             price: Цена товара
+>             quantity: Количество товара в наличии
+  
+>         Raises:
+>             ZeroQuantityError: Если quantity == 0
+>         """
+          # ДЗ 17.1: Проверка нулевого количества
+>         if quantity == 0:
+>             msg = "Товар с нулевым количеством не может быть добавлен"
+>             raise ZeroQuantityError(msg)
+  
+>         self.name = name
+>         self.description = description
+>         self.__price = price  # ДЗ 14.2: Приватный атрибут
+>         self.quantity = quantity
+      # ДЗ 14.2: Геттер для цены
+  
+>     @property
+>     def price(self):
+>         """Геттер для цены товара."""
+>         return self.__price
+  
+      # ДЗ 14.2: Сеттер для цены с проверкой
+>     @price.setter
+>     def price(self, new_price: float):
+>         """
+>         Сеттер для цены товара.
+  
+>         Args:
+>             new_price: Новая цена товара
+>         """
+>         if new_price <= 0:
+>             print("Цена не должна быть нулевая или отрицательная")
+>             return  # Не меняем цену
+>         self.__price = new_price
+  
+      # ДЗ 15.1: Магический метод __str__
+-     def __str__(self):
+-         """Строковое представление товара."""
+-         return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
+  
+      # ДЗ 15.1: Магический метод __add__
+>     def __add__(self, other):
+>         """
+>         Сложение товаров.
+  
+>         Args:
+>             other: Другой товар того же класса
+  
+>         Returns:
+>             float: Суммарная стоимость
+  
+>         Raises:
+>             TypeError: Если товары разных классов
+>         """
+          # ДЗ 16.1: Проверка типа
+>         if not isinstance(self, type(other)):
+>             raise TypeError("Можно складывать только товары одного типа")
+>         return self.__price * self.quantity + other.__price * other.quantity
+  
+      # ДЗ 14.2: Класс-метод
+>     @classmethod
+>     def new_product(cls, product_data: Dict[str, Any],
+>                     products_list: List['Product'] = None):
+>         """
+>         Создает новый товар из словаря данных.
+  
+>         Args:
+>             product_data: Словарь с данными товара
+>             products_list: Список существующих товаров
+  
+>         Returns:
+>             Product: Новый объект товара
+>         """
+          # Проверяем обязательные поля
+>         required_fields = ['name', 'description', 'price', 'quantity']
+>         for field in required_fields:
+>             if field not in product_data:
+>                 raise ValueError(f"Отсутствует поле: {field}")
+  
+          # Проверяем дубликаты
+>         if products_list:
+>             for existing_product in products_list:
+>                 if existing_product.name == product_data['name']:
+                      # Объединяем количество
+>                     existing_product.quantity += product_data['quantity']
+                      # Выбираем максимальную цену
+>                     if product_data['price'] > existing_product.price:
+>                         existing_product.price = product_data['price']
+>                     return existing_product
+          # Создаем новый товар
+>         return cls(
+>             name=product_data['name'],
+>             description=product_data['description'],
+>             price=product_data['price'],
+>             quantity=product_data['quantity']
+>         )
+  
+  
+  # ==================== ДЗ 16.1: Классы-наследники ====================
+> class Smartphone(Product):
+>     """Класс для представления смартфона."""
+  
+>     def __init__(self, name: str, description: str, price: float,
+>                  quantity: int, efficiency: str, model: str,
+>                  memory: int, color: str):
+>         """
+>         Инициализация смартфона.
+  
+>         Args:
+>             name: Название товара
+>             description: Описание товара
+>             price: Цена товара
+>             quantity: Количество товара в наличии
+>             efficiency: Производительность
+>             model: Модель
+>             memory: Объем памяти (ГБ)
+>             color: Цвет
+>         """
+>         super().__init__(name, description, price, quantity)
+>         self.efficiency = efficiency
+>         self.model = model
+>         self.memory = memory
+>         self.color = color
+  
+-     def __str__(self):
+-         """Строковое представление смартфона."""
+-         return (f"{self.name} ({self.model}), {self.price} руб. "
+-                 f"Остаток: {self.quantity} шт. Память: {self.memory}ГБ")
+  
+  
+> class LawnGrass(Product):
+>     """Класс для представления газонной травы."""
+  
+>     def __init__(self, name: str, description: str, price: float,
+>                  quantity: int, country: str,
+>                  germination_period: int, color: str):
+>         """
+>         Инициализация газонной травы.
+  
+>         Args:
+>             name: Название товара
+>             description: Описание товара
+>             price: Цена товара
+>             quantity: Количество товара в наличии
+>             country: Страна-производитель
+>             germination_period: Срок прорастания (дней)
+>             color: Цвет
+>         """
+>         super().__init__(name, description, price, quantity)
+>         self.country = country
+>         self.germination_period = germination_period
+>         self.color = color
+  
+-     def __str__(self):
+-         """Строковое представление газонной травы."""
+-         return (f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт. "
+-                 f"Страна: {self.country}, "
+-                 f"Прорастание: {self.germination_period} дней")
+  
+  # ==================== ДЗ 14.1-17.1: Класс Category ====================
+  
+  
+> class Category:
+>     """Класс для представления категории товаров."""
+  
+>     category_count = 0  # Счетчик категорий
+>     product_count = 0   # Счетчик товаров
+  
+>     def __init__(self, name: str, description: str):
+>         """Инициализация категории."""
+>         self.name = name
+>         self.description = description
+>         self.__products = []  # ДЗ 14.2: Приватный атрибут
+>         Category.category_count += 1
+  
+      # ДЗ 14.2: Метод добавления товара
+>     def add_product(self, product):
+>         """
+>         Добавление товара в категорию.
+  
+>         Args:
+>             product: Объект товара
+  
+>         Raises:
+>             TypeError: Если передан не товар
+>         """
+          # ДЗ 16.1: Проверка типа
+>         if not isinstance(product, Product):
+>             raise TypeError("Можно добавлять только товары")
+  
+>         self.__products.append(product)
+>         Category.product_count += 1
+  
+      # ДЗ 17.1: Метод подсчета средней цены
+>     def average_price(self) -> float:
+>         """
+>         Расчет средней цены товаров в категории.
+>         Returns:
+>             Средняя цена товаров или 0, если товаров нет
+>         """
+>         try:
+>             total = sum(product.price for product in self.__products)
+>             return total / len(self.__products)
+>         except ZeroDivisionError:
+>             return 0.0
+  
+      # ДЗ 14.2: Геттер для товаров
+>     @property
+>     def products(self):
+>         """Геттер для строкового представления товаров."""
+>         result = ""
+>         for product in self.__products:
+>             result += str(product) + "\n"
+>         return result.rstrip()
+  
+      # ДЗ 15.1: Магический метод __str__
+-     def __str__(self):
+-         """Строковое представление категории."""
+-         total = sum(product.quantity for product in self.__products)
+-         return f"{self.name}, количество продуктов: {total} шт."
+  
+-     def __repr__(self):
+-         """Представление для отладки."""
+-         return f"Category('{self.name}', '{self.description}')"
+  
+  
+  # ==================== Тестирование ====================
+- if __name__ == "__main__":
+-     print("✅ Модуль main.py успешно загружен")
+-     print("Классы: Product, Smartphone, LawnGrass, Category, ZeroQuantityError")
+-     print()
+  
+      # Тестирование
+-     print("=== Тест ДЗ 14.1-14.2 ===")
+-     try:
+-         product1 = Product("Телефон", "Смартфон", 50000.0, 10)
+-         print(f"Цена до: {product1.price}")
+-         product1.price = 45000.0
+-         print(f"Цена после: {product1.price}")
+  
+-         product_data = {
+>             'name': 'Ноутбук',
+>             'description': 'Игровой',
+>             'price': 150000.0,
+>             'quantity': 3
+>         }
+-         product3 = Product.new_product(product_data)
+-         print(f"new_product: {product3}")
+  
+-     except ZeroQuantityError as e:
+-         print(f"Ошибка: {e}")
+  
+-     print("\n=== Тест ДЗ 15.1 ===")
+-     product2 = Product("Наушники", "Беспроводные", 8000.0, 5)
+-     total_cost = product1 + product2
+-     print(f"Сумма: {total_cost} руб.")
+-     print("\n=== Тест ДЗ 16.1 ===")
+-     smartphone = Smartphone(
+>         "iPhone", "Флагман", 99999.0, 7,
+>         "Высокая", "15 Pro", 256, "Black"
+>     )
+-     grass = LawnGrass(
+>         "Трава газонная", "Для дачи", 500.0, 100,
+>         "Россия", 14, "Зеленая"
+>     )
+-     print(f"Смартфон: {smartphone}")
+-     print(f"Газонная трава: {grass}")
+  
+-     print("\n=== Тест ДЗ 17.1 ===")
+-     category = Category("Электроника", "Техника")
+-     category.add_product(product1)
+-     category.add_product(smartphone)
+  
+-     print(f"Категория: {category}")
+-     print(f"Средняя цена: {category.average_price():.2f} руб.")
+  
+-     empty = Category("Пустая", "Нет товаров")
+-     print(f"Средняя цена пустой: {empty.average_price():.2f} руб.")
+  
+-     try:
+-         Product("Битый", "Не работает", 100.0, 0)
+-     except ZeroQuantityError as e:
+-         print(f"Поймано исключение: {e}")
+-     print("\n✅ Все тесты пройдены!")
