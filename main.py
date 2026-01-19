@@ -52,6 +52,7 @@ class Category:
         self.name = name
         self.description = description
         self.__products = []  # Приватный атрибут для списка товаров
+
         Category.category_count += 1
 
     def add_product(self, product: Product):
@@ -94,3 +95,9 @@ class Category:
     def __repr__(self):
         """Представление для отладки"""
         return f"Category('{self.name}', '{self.description}')"
+
+
+# Добавим простой тест для проверки импорта
+if __name__ == "__main__":
+    print("✅ Модуль main.py успешно загружен")
+    print("Доступные классы: Product, Category, ZeroQuantityError")

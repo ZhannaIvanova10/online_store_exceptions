@@ -1,0 +1,9 @@
+[run]
+source = .
+omit = 
+    check_*.py
+    final_*.py
+    quick_*.py
+    run.py
+    test_*.py
+    *test*.py
