@@ -19,7 +19,7 @@ except ZeroQuantityError as e:
     print(f"✅ Вызвано ZeroQuantityError")
     error_msg = str(e)
     print(f"   Сообщение: '{error_msg}'")
-    
+
     # Проверяем точное сообщение
     expected = "Товар с нулевым количеством не может быть добавлен"
     if expected in error_msg:
@@ -37,7 +37,7 @@ try:
     print(f"   Название: {product.name}")
     print(f"   Цена: {product.price}")
     print(f"   Количество: {product.quantity}")
-    
+
     if product.quantity == 5:
         print("✅ Количество установлено правильно")
     else:
@@ -51,10 +51,10 @@ try:
     product = Product("Наушники", "Беспроводные", 5000.0, 3)
     str_repr = str(product)
     expected = "Наушники, 5000.0 руб. Остаток: 3 шт."
-    
+
     print(f"   str(product) = '{str_repr}'")
     print(f"   Ожидалось:   '{expected}'")
-    
+
     if str_repr == expected:
         print("✅ Строковое представление корректно")
     else:

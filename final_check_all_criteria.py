@@ -1,3 +1,4 @@
+import re
 import sys
 import subprocess
 import os
@@ -66,7 +67,9 @@ try:
             results.append(("2. average_price", False))
             all_passed = False
     else:
-        print(f"   ❌ FAIL: Пустая категория не возвращает 0: {cat.average_price()}")
+        print(
+            f"   ❌ FAIL: Пустая категория не возвращает 0: {
+                cat.average_price()}")
         results.append(("2. average_price", False))
         all_passed = False
 except Exception as e:
@@ -75,10 +78,12 @@ except Exception as e:
     all_passed = False
 # Критерий 3
 print("\n3. Тесты...")
-result = subprocess.run([sys.executable, "-m", "pytest", "test_main.py", "-q"], 
-                       capture_output=True, text=True)
+result = subprocess.run([sys.executable, "-m", "pytest", "test_main.py", "-q"],
+                        capture_output=True, text=True)
 if result.returncode == 0:
-    print(f"   ✅ PASS: Все тесты проходят ({result.stdout.count('passed')} passed)")
+    print(
+        f"   ✅ PASS: Все тесты проходят ({
+            result.stdout.count('passed')} passed)")
     results.append(("3. Тесты", True))
 else:
     print("   ❌ FAIL: Тесты не проходят")
@@ -88,8 +93,7 @@ else:
 # Критерий 4
 print("\n4. Покрытие тестами...")
 result = subprocess.run([sys.executable, "-m", "pytest", "--cov=main", "test_main.py", "-q"],
-                       capture_output=True, text=True)
-import re
+                        capture_output=True, text=True)
 coverage = 0
 for line in result.stdout.split('\n'):
     if 'TOTAL' in line:
@@ -123,8 +127,11 @@ print("\n6. README...")
 try:
     with open("README.md", "r", encoding="utf-8") as f:
         content = f.read()
-    if len(content.strip()) > 100 and ("17.1" in content or "исключени" in content.lower()):
-        print(f"   ✅ PASS: README содержит информацию ({len(content)} символов)")
+    if len(content.strip()) > 100 and (
+            "17.1" in content or "исключени" in content.lower()):
+        print(
+            f"   ✅ PASS: README содержит информацию ({
+                len(content)} символов)")
         results.append(("6. README", True))
     else:
         print(f"   ❌ FAIL: README не содержит нужной информации")

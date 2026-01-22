@@ -7,3 +7,16 @@ omit =
     run.py
     test_*.py
     *test*.py
+    __pycache__/*
+    .*/*
+    
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    def __str__
+    @abstractmethod
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    
+fail_under = 80

@@ -37,7 +37,7 @@ try:
     result = cat1.average_price()
     print(f"   Добавлен: {p1.name} за {p1.price} руб.")
     print(f"   average_price() = {result}")
-    
+
     if result == 1500.0:
         print("✅ Средняя цена правильная: 1500.0")
     else:
@@ -52,18 +52,18 @@ try:
     p2 = Product("Товар2", "Описание", 1000.0, 1)
     p3 = Product("Товар3", "Описание", 2000.0, 1)
     p4 = Product("Товар4", "Описание", 3000.0, 1)
-    
+
     cat2.add_product(p2)
     cat2.add_product(p3)
     cat2.add_product(p4)
-    
+
     result = cat2.average_price()
     expected = (1000 + 2000 + 3000) / 3  # 2000.0
-    
+
     print(f"   Товары: {p2.price}, {p3.price}, {p4.price} руб.")
     print(f"   average_price() = {result}")
     print(f"   Ожидалось: {expected}")
-    
+
     if abs(result - expected) < 0.001:
         print("✅ Средняя цена рассчитана правильно")
     else:
@@ -79,10 +79,10 @@ try:
     p6 = Product("Еще один", "Описание", 0.0, 3)
     cat3.add_product(p5)
     cat3.add_product(p6)
-    
+
     result = cat3.average_price()
     print(f"   average_price() = {result}")
-    
+
     if result == 0.0:
         print("✅ Средняя цена 0 для товаров с нулевой ценой")
     else:

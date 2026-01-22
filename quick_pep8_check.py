@@ -14,7 +14,7 @@ for file in files:
         capture_output=True,
         text=True
     )
-    
+
     if result.stdout.strip():
         errors = int(result.stdout.strip())
         print(f"  ❌ {errors} ошибок")

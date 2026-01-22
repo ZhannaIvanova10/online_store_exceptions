@@ -8,6 +8,7 @@ print("=" * 70)
 all_passed = True
 criteria = {}
 
+
 def check_criterion(name, check_func):
     """Проверка одного критерия"""
     global all_passed
@@ -26,6 +27,8 @@ def check_criterion(name, check_func):
         criteria[name] = False
         all_passed = False
 # Критерий 1: Исключение при нулевом количестве
+
+
 def check_criterion_1():
     from main import Product, ZeroQuantityError
     try:
@@ -38,6 +41,8 @@ def check_criterion_1():
         return False
 
 # Критерий 2: Метод average_price
+
+
 def check_criterion_2():
     from main import Category, Product
     cat = Category("Тест", "Тест")
@@ -50,6 +55,8 @@ def check_criterion_2():
     return cat.average_price() == 150.0
 
 # Критерий 3: Тесты работают
+
+
 def check_criterion_3():
     result = subprocess.run(
         [sys.executable, "-m", "pytest", "test_main.py", "-q"],
@@ -59,6 +66,8 @@ def check_criterion_3():
     return result.returncode == 0
 
 # Критерий 4: Покрытие тестами >75%
+
+
 def check_criterion_4():
     result = subprocess.run(
         [sys.executable, "-m", "pytest", "--cov=main", "test_main.py", "-q"],
@@ -74,6 +83,8 @@ def check_criterion_4():
     return False
 
 # Критерий 5: Код запускается без ошибок
+
+
 def check_criterion_5():
     try:
         # Просто импортируем и создаем объекты
@@ -86,6 +97,8 @@ def check_criterion_5():
         return False
 
 # Критерий 6: README существует и не пустой
+
+
 def check_criterion_6():
     try:
         with open("README.md", "r", encoding="utf-8") as f:
@@ -95,14 +108,19 @@ def check_criterion_6():
         return False
 
 # Критерий 7: Пользовательское исключение
+
+
 def check_criterion_7():
     from main import ZeroQuantityError
     return issubclass(ZeroQuantityError, ValueError)
 
 # Критерий 8: PEP 8 (<5 ошибок)
+
+
 def check_criterion_8():
     result = subprocess.run(
-        [sys.executable, "-m", "flake8", "main.py", "test_main.py", "run.py", "--count", "--max-line-length=100"],
+        [sys.executable, "-m", "flake8", "main.py", "test_main.py",
+            "run.py", "--count", "--max-line-length=100"],
         capture_output=True,
         text=True
     )
@@ -113,14 +131,21 @@ def check_criterion_8():
             error_count += int(line.split()[0])
     return error_count <= 5
 
+
 # Запускаем все проверки
-check_criterion("1. Исключение при нулевом количестве товара", check_criterion_1)
-check_criterion("2. Метод average_price с обработкой ZeroDivisionError", check_criterion_2)
+check_criterion(
+    "1. Исключение при нулевом количестве товара",
+    check_criterion_1)
+check_criterion(
+    "2. Метод average_price с обработкой ZeroDivisionError",
+    check_criterion_2)
 check_criterion("3. Тесты выполняются без ошибок", check_criterion_3)
 check_criterion("4. Покрытие тестами >75%", check_criterion_4)
 check_criterion("5. Весь код запускается без ошибок", check_criterion_5)
 check_criterion("6. README с информацией о проекте", check_criterion_6)
-check_criterion("7. Пользовательское исключение ZeroQuantityError", check_criterion_7)
+check_criterion(
+    "7. Пользовательское исключение ZeroQuantityError",
+    check_criterion_7)
 check_criterion("8. Соответствие PEP 8 (<5 ошибок)", check_criterion_8)
 
 print("\n" + "=" * 70)
