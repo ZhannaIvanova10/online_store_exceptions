@@ -115,7 +115,7 @@ class LawnGrass(Product, ReprMixin):
         self.color = color
     
     def __str__(self):
-        # ИСПРАВЛЕНИЕ: "из России" вместо "из России"
+        # ИСПРАВЛЕНИЕ: "из России" вместо "из Россия"
         return f"{self.name} из {self.country}, {self.price} руб. Остаток: {self.quantity} шт."
 
 
