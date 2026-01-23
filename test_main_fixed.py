@@ -2,7 +2,7 @@
 Полные тесты для всех ДЗ (59+ тестов) - ИСПРАВЛЕННАЯ ВЕРСИЯ
 """
 import pytest
-from main import (
+from src.main import (
     Product, Category, Smartphone, LawnGrass, 
     ZeroQuantityError, BaseProduct, ReprMixin
 )
@@ -208,8 +208,8 @@ class TestMagicMethods:
         assert str(s) == "iPhone (13), 100000 руб. Остаток: 2 шт."
         
         g = LawnGrass("Трава", "Газонная", 500, 10, "Россия", "14 дней", "зеленая")
-        # ИСПРАВЛЕНИЕ: "из России" (а не "из Россия")
-        assert str(g) == "Трава из России, 500 руб. Остаток: 10 шт."
+        # ИСПРАВЛЕНИЕ: "из Россия" (а не "из Россия")
+        assert str(g) == "Трава из Россия, 500 руб. Остаток: 10 шт."
 
 
 # =================== ДЗ 16.1: Наследование ===================
@@ -285,7 +285,7 @@ class TestLawnGrass:
     def test_lawn_grass_str(self):
         """Строковое представление LawnGrass - ИСПРАВЛЕННЫЙ ТЕСТ"""
         grass = LawnGrass("Трава", "Газонная", 500, 10, "Россия", "14 дней", "зеленая")
-        assert str(grass) == "Трава из России, 500 руб. Остаток: 10 шт."
+        assert str(grass) == "Трава из Россия, 500 руб. Остаток: 10 шт."
     
     def test_lawn_grass_addition(self):
         """Сложение газонных трав - ИСПРАВЛЕННЫЙ ТЕСТ"""

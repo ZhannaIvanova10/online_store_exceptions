@@ -2,7 +2,7 @@
 Полные тесты для всех ДЗ (59+ тестов) - ИСПРАВЛЕННАЯ ВЕРСИЯ
 """
 import pytest
-from main import (
+from src.main import (
     Product, Category, Smartphone, LawnGrass, 
     ZeroQuantityError, BaseProduct, ReprMixin
 )

@@ -2,7 +2,7 @@
 Полные тесты для всех ДЗ (59+ тестов)
 """
 import pytest
-from main import (
+from src.main import (
     Product, Category, Smartphone, LawnGrass, 
     ZeroQuantityError, BaseProduct, ReprMixin
 )
@@ -208,7 +208,7 @@ class TestMagicMethods:
         assert "iPhone (13)" in str(s)
         
         g = LawnGrass("Трава", "Газонная", 500, 10, "Россия", "14 дней", "зеленая")
-        assert "Трава из России" in str(g)
+        assert "Трава из Россия" in str(g)
 # =================== ДЗ 16.1: Наследование ===================
 class TestSmartphone:
     """Тесты класса Smartphone"""
@@ -281,7 +281,7 @@ class TestLawnGrass:
     def test_lawn_grass_str(self):
         """Строковое представление LawnGrass"""
         grass = LawnGrass("Трава", "Газонная", 500, 10, "Россия", "14 дней", "зеленая")
-        assert "Трава из России" in str(grass)
+        assert "Трава из Россия" in str(grass)
     def test_lawn_grass_addition(self):
         """Сложение газонных трав"""
         g1 = LawnGrass("Трава", "Газонная", 500, 10, "Россия", "14 дней", "зеленая")

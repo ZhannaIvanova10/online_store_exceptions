@@ -1,19 +1,10 @@
 [run]
-source = .
+source = src
 omit = 
     */test_*.py
     *_test.py
-    *_backup.py
-    *_fixed.py
-    *_full.py
-    check_*.py
-    run.py
-    fix_*.py
-    generate_*.py
-    final_*.py
 
 [report]
-# Исключаем из отчета технические файлы
 exclude_lines =
     pragma: no cover
     def __repr__
@@ -22,4 +13,4 @@ exclude_lines =
 
 [html]
 directory = htmlcov
-title = Coverage report - ДЗ 17.1 (main.py: 97%)
+title = ДЗ 17.1 Coverage Report
