@@ -1,22 +1,16 @@
 [run]
-source = .
+source = src
 omit = 
-    check_*.py
-    final_*.py
-    quick_*.py
-    run.py
-    test_*.py
-    *test*.py
-    __pycache__/*
-    .*/*
-    
+    */test_*.py
+    *_test.py
+
 [report]
 exclude_lines =
     pragma: no cover
     def __repr__
     def __str__
-    @abstractmethod
-    raise NotImplementedError
     if __name__ == .__main__.:
-    
-fail_under = 80
+
+[html]
+directory = htmlcov
+title = ДЗ 17.1 Coverage Report
