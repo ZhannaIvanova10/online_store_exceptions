@@ -39,3 +39,17 @@ Thumbs.db
 
 # Project specific
 .pytest_cache/
+
+# Временные файлы решений
+*_solution.py
+*_fix*.py
+*_test*.py
+*_check*.py
+*_marker.py
+simple*.py
+test_*.py
+add_*.py
+create_*.py
+final_*.py
+fix_*.py
+

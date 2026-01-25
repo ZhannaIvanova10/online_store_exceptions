@@ -1,16 +1,24 @@
 [run]
-source = src
-omit = 
-    */test_*.py
-    *_test.py
-
+source = .
+omit =
+    */tests/*
+    */__pycache__/*
+    */venv/*
+    */env/*
+    */.pytest_cache/*
+    */htmlcov/*
+    */*.pyc
+    setup.py
+    
 [report]
 exclude_lines =
     pragma: no cover
     def __repr__
-    def __str__
+    raise NotImplementedError
     if __name__ == .__main__.:
-
-[html]
-directory = htmlcov
-title = ДЗ 17.1 Coverage Report
+    if TYPE_CHECKING:
+    pass
+    
+show_missing = True
+skip_covered = False
+precision = 2
