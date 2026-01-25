@@ -1,0 +1,94 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.3, pytest-7.4.0, pluggy-1.6.0 -- C:\Users\Жанна\AppData\Local\Programs\Python\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Жанна\online_store_exceptions
+configfile: pytest.ini
+testpaths: tests
+plugins: anyio-4.12.1, cov-4.1.0, mock-3.15.1
+collecting ... collected 75 items
+
+tests/test_exceptions.py::TestZeroQuantityError::test_exception_inheritance PASSED [  1%]
+tests/test_exceptions.py::TestZeroQuantityError::test_exception_message PASSED [  2%]
+tests/test_exceptions.py::TestZeroQuantityError::test_product_zero_quantity_raises PASSED [  4%]
+tests/test_exceptions.py::TestZeroQuantityError::test_category_add_product_zero_quantity PASSED [  5%]
+tests/test_exceptions.py::TestZeroQuantityError::test_valid_product_no_exception PASSED [  6%]
+tests/test_exceptions.py::test_multiple_exceptions PASSED                [  8%]
+tests/test_main.py::test_import PASSED                                   [  9%]
+tests/test_main.py::test_basic_logic PASSED                              [ 10%]
+tests/test_main.py::test_exception_handling PASSED                       [ 12%]
+tests/test_main_full.py::TestZeroQuantityError::test_inheritance PASSED  [ 13%]
+tests/test_main_full.py::TestZeroQuantityError::test_default_message PASSED [ 14%]
+tests/test_main_full.py::TestZeroQuantityError::test_custom_message PASSED [ 16%]
+tests/test_main_full.py::TestZeroQuantityError::test_raised_on_zero_quantity_product PASSED [ 17%]
+tests/test_main_full.py::TestZeroQuantityError::test_raised_on_zero_quantity_add_product PASSED [ 18%]
+tests/test_main_full.py::TestProductBasic::test_creation_valid PASSED    [ 20%]
+tests/test_main_full.py::TestProductBasic::test_str_representation PASSED [ 21%]
+tests/test_main_full.py::TestProductBasic::test_repr_representation PASSED [ 22%]
+tests/test_main_full.py::TestProductBasic::test_product_count_increments PASSED [ 24%]
+tests/test_main_full.py::TestProductBasic::test_with_fractional_price PASSED [ 25%]
+tests/test_main_full.py::TestProductBasic::test_with_zero_price PASSED   [ 26%]
+tests/test_main_full.py::TestCategoryBasic::test_creation PASSED         [ 28%]
+tests/test_main_full.py::TestCategoryBasic::test_add_product PASSED      [ 29%]
+tests/test_main_full.py::TestCategoryBasic::test_add_multiple_products PASSED [ 30%]
+tests/test_main_full.py::TestCategoryBasic::test_str_representation_empty PASSED [ 32%]
+tests/test_main_full.py::TestCategoryBasic::test_str_representation_with_products PASSED [ 33%]
+tests/test_main_full.py::TestCategoryBasic::test_category_count_increments PASSED [ 34%]
+tests/test_main_full.py::TestCategoryBasic::test_products_property PASSED [ 36%]
+tests/test_main_full.py::TestAveragePrice::test_average_price_empty PASSED [ 37%]
+tests/test_main_full.py::TestAveragePrice::test_average_price_single PASSED [ 38%]
+tests/test_main_full.py::TestAveragePrice::test_average_price_multiple PASSED [ 40%]
+tests/test_main_full.py::TestAveragePrice::test_average_price_fractional PASSED [ 41%]
+tests/test_main_full.py::TestAveragePrice::test_average_price_after_removal PASSED [ 42%]
+tests/test_main_full.py::TestMagicMethods::test_add_products_same_type PASSED [ 44%]
+tests/test_main_full.py::TestMagicMethods::test_add_products_different_type_error PASSED [ 45%]
+tests/test_main_full.py::TestMagicMethods::test_add_product_with_non_product_error PASSED [ 46%]
+tests/test_main_full.py::TestMagicMethods::test_str_magic_method PASSED  [ 48%]
+tests/test_main_full.py::TestSmartphone::test_smartphone_creation PASSED [ 49%]
+tests/test_main_full.py::TestSmartphone::test_smartphone_inheritance PASSED [ 50%]
+tests/test_main_full.py::TestSmartphone::test_smartphone_str PASSED      [ 52%]
+tests/test_main_full.py::TestSmartphone::test_smartphone_addition PASSED [ 53%]
+tests/test_main_full.py::TestLawnGrass::test_lawn_grass_creation PASSED  [ 54%]
+tests/test_main_full.py::TestLawnGrass::test_lawn_grass_inheritance PASSED [ 56%]
+tests/test_main_full.py::TestLawnGrass::test_lawn_grass_str PASSED       [ 57%]
+tests/test_main_full.py::TestLawnGrass::test_lawn_grass_addition PASSED  [ 58%]
+tests/test_main_full.py::TestAbstractClassesAndMixins::test_base_product_is_abstract PASSED [ 60%]
+tests/test_main_full.py::TestAbstractClassesAndMixins::test_product_inherits_from_base_product PASSED [ 61%]
+tests/test_main_full.py::TestAbstractClassesAndMixins::test_repr_mixin_works PASSED [ 62%]
+tests/test_main_full.py::TestAbstractClassesAndMixins::test_all_products_use_repr_mixin PASSED [ 64%]
+tests/test_main_full.py::TestPrivateAttributes::test_category_private_products PASSED [ 65%]
+tests/test_main_full.py::TestPrivateAttributes::test_products_property_is_getter PASSED [ 66%]
+tests/test_main_full.py::test_integration PASSED                         [ 68%]
+tests/test_main_full.py::TestEdgeCases::test_product_with_max_values PASSED [ 69%]
+tests/test_main_full.py::TestEdgeCases::test_category_with_many_products PASSED [ 70%]
+tests/test_main_full.py::TestEdgeCases::test_new_product_class_method PASSED [ 72%]
+tests/test_main_full.py::TestAdditional::test_zero_quantity_error_message_contains PASSED [ 73%]
+tests/test_main_full.py::TestAdditional::test_average_price_returns_float PASSED [ 74%]
+tests/test_main_full.py::TestAdditional::test_product_creation_with_negative_quantity PASSED [ 76%]
+tests/test_main_full.py::TestAdditional::test_smartphone_repr_contains_attributes PASSED [ 77%]
+tests/test_main_full.py::TestAdditional::test_lawn_grass_repr_contains_attributes PASSED [ 78%]
+tests/test_main_full.py::TestAdditional::test_category_product_count PASSED [ 80%]
+tests/test_main_full.py::TestAdditional::test_multiple_categories_independent PASSED [ 81%]
+tests/test_product.py::TestProductBasic::test_product_creation PASSED    [ 82%]
+tests/test_product.py::TestProductBasic::test_product_str PASSED         [ 84%]
+tests/test_product.py::TestProductBasic::test_product_repr PASSED        [ 85%]
+tests/test_product.py::TestProductBasic::test_price_setter_valid PASSED  [ 86%]
+tests/test_product.py::TestProductBasic::test_price_setter_invalid PASSED [ 88%]
+tests/test_product.py::TestProductBasic::test_price_setter_zero PASSED   [ 89%]
+tests/test_product.py::TestProductBasic::test_product_addition PASSED    [ 90%]
+tests/test_product.py::TestProductBasic::test_product_addition_different_types PASSED [ 92%]
+tests/test_product.py::TestProductClassMethod::test_new_product_basic PASSED [ 93%]
+tests/test_product.py::TestProductClassMethod::test_new_product_update_existing PASSED [ 94%]
+tests/test_product.py::TestProductClassMethod::test_new_product_missing_fields PASSED [ 96%]
+tests/test_project_files.py::test_required_files_exist PASSED            [ 97%]
+tests/test_project_files.py::test_python_files_syntax PASSED             [ 98%]
+tests/test_project_files.py::test_imports_work PASSED                    [100%]
+
+---------- coverage: platform win32, python 3.13.3-final-0 -----------
+Name          Stmts   Miss   Cover   Missing
+--------------------------------------------
+src\main.py     111      1  99.10%   77
+--------------------------------------------
+TOTAL           111      1  99.10%
+
+
+============================= 75 passed in 4.74s ==============================

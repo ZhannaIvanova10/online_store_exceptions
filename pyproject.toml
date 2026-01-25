@@ -1,0 +1,48 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--verbose",
+    "--tb=short",
+    "--strict-markers"
+]
+markers = [
+    "exception: exception handling tests",
+    "unit: unit tests",
+    "integration: integration tests",
+    "slow: slow tests",
+    "product: product related tests",
+    "category: category related tests"
+]
+
+[tool.coverage.run]
+source = ["src", "."]
+omit = [
+    "*/tests/*",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/env/*",
+    "*/.pytest_cache/*",
+    "*/htmlcov/*",
+    "*/*.pyc",
+    "setup.py",
+    "test_*.py",
+    "check_*.py",
+    "final_*.py"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "pass",
+    "@abstractmethod"
+]
+show_missing = true
+skip_covered = false
+precision = 2

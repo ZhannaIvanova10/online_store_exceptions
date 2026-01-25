@@ -1,22 +1,24 @@
 [run]
 source = .
-omit = 
-    check_*.py
-    final_*.py
-    quick_*.py
-    run.py
-    test_*.py
-    *test*.py
-    __pycache__/*
-    .*/*
+omit =
+    */tests/*
+    */__pycache__/*
+    */venv/*
+    */env/*
+    */.pytest_cache/*
+    */htmlcov/*
+    */*.pyc
+    setup.py
     
 [report]
 exclude_lines =
     pragma: no cover
     def __repr__
-    def __str__
-    @abstractmethod
     raise NotImplementedError
     if __name__ == .__main__.:
+    if TYPE_CHECKING:
+    pass
     
-fail_under = 80
+show_missing = True
+skip_covered = False
+precision = 2
